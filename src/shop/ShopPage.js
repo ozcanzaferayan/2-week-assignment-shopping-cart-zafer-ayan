@@ -1,26 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { Layout, Menu, Breadcrumb, Image, Space, Button, Card, Select } from 'antd';
-import { UserOutlined, LaptopOutlined, NotificationOutlined } from '@ant-design/icons';
-import { Row, Col, Divider, Checkbox, List } from 'antd';
+import { Layout, Button, Card, Select } from 'antd';
+import { Row, Col, Checkbox, List } from 'antd';
 import { Typography } from 'antd';
-import { Link } from 'react-router-dom';
-import MyHeader from '../components/MyHeader';
 import { useHistory } from "react-router-dom";
 const { Title, Paragraph } = Typography;
 const { Meta } = Card;
 
 
 
-const { SubMenu } = Menu;
-const { Header, Content, Footer, Sider } = Layout;
+const { Content, Sider } = Layout;
 export default function ShopPage() {
   let history = useHistory();
   const [isAllFiltersCleared, setIsAllFiltersCleared] = useState(true);
   const [categoryList, setCategoryList] = useState([])
   const [products, setProducts] = useState([]);
-  const [showingProducts, setShowingProducts] = useState([])
   const [filter, setFilter] = useState({})
-  const [sortList, setSortList] = useState([
+  const sortList = [
     {
       name: 'mostPopular',
       description: 'Most Popular'
@@ -37,7 +32,7 @@ export default function ShopPage() {
       name: 'lowestPrice',
       description: 'Lowest Price'
     },
-  ]);
+  ];
 
   const [selectedSort, setSelectedSort] = useState('mostPopular');
 
@@ -50,7 +45,6 @@ export default function ShopPage() {
   const handleData = (data) => {
     handleCategoryList(data);
     setProducts(data);
-    setShowingProducts(data);
   }
   const handleCategoryList = (data) => {
     const categorySet = new Set()
@@ -126,7 +120,8 @@ export default function ShopPage() {
           <Layout>
             <Sider theme={'light'}>
               <List
-                header={<div>Filters <Button onClick={handleClearFilters}>Clear Filters</Button><br />
+                header={<div>Filters
+                  <Button onClick={handleClearFilters}>Clear Filters</Button><br />
                   Categories</div>}
                 footer={<div>Footer</div>}
                 bordered
